@@ -13,6 +13,8 @@ const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
+    <script is:inline src="/js/alpine.min.js" defer></script>
+    <script is:inline src="/js/htmx.min.js" defer></script>
   </head>
   <body>
     <div class="parent h-screen flex flex-col max-w-7xl mx-auto">
@@ -86,8 +88,8 @@ const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
           <a
             class="no-underline hover:underline"
             href="https://jonathanyoungblood.com"
-            target="_blank"
-            >♥ JY</a>
+            target="_blank">♥ JY</a
+          >
         </div>
       </footer>
     </div>
