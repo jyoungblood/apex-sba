@@ -1,0 +1,94 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// EXAMPLE - Get content from a Supabase table using the Astro-specific server client
+// Try it out with a table from your own database!
+
+// import { createClient } from "../lib/supabase";
+
+// const supabase = createClient.astro(Astro);
+
+// const { data: countries, error: countriesError } = await supabase
+//   .from("countries_demo")
+//   .select("*");
+
+// if (countriesError) {
+//   console.error("Error fetching countries:", countriesError);
+// }
+---
+
+<Layout title="Astro & Supabase SSR Auth Demo">
+  <div class="flex flex-col items-center justify-center flex-1">
+        <div class="mt-8 text-center">
+      <div class="text-2xl font-bold">
+        The first page is profound.
+      </div>
+    </div>
+
+    {
+      // Astro.locals.isAuthenticated ? (
+      //   <br /><br /><br />
+      //   <p>You are logged in 🤠</p>
+      // ) : (
+      //   <br /><br /><br />
+      //   <p>
+      //     You are <b>NOT</b> logged in 🫤
+      //   </p>
+      // )
+    }
+
+    {
+      // // for Astro server client example:
+      // countries && (
+      //   <div class="mt-8">
+      //     <h2 class="text-lg font-semibold mb-3">Countries List Demo</h2>
+      //     {countriesError && (
+      //       <p class="text-red-500">Error loading countries</p>
+      //     )}
+      //     <ul class="list-disc pl-5">
+      //       {countries?.map((country) => (
+      //         <li class="text-sm mb-1">{country.name}</li>
+      //       ))}
+      //     </ul>
+      //   </div>
+      // )
+    }
+
+    <!-- for browser client example: -->
+    <!-- 
+    <div class="mt-8" id="countries-container">
+      <h2 class="text-lg font-semibold mb-3">Countries List Demo</h2>
+      <div id="countries-list" class="list-disc pl-5"></div>
+    </div>
+    -->
+  </div>
+</Layout>
+
+<script>
+  // EXAMPLE - Get content from a Supabase table using the browser client
+  // Try it out with a table from your own database!
+
+  // import { createClient } from "../lib/supabase";
+
+  // const supabase = createClient.browser();
+
+  // async function fetchCountries() {
+  //   const { data: countries, error } = await supabase
+  //     .from("countries_demo")
+  //     .select("*");
+
+  //   const countriesList = document.getElementById("countries-list");
+
+  //   if (error) {
+  //     countriesList.innerHTML = `<p class="text-red-500">Error loading countries</p>`;
+  //     console.error("Error fetching countries:", error);
+  //     return;
+  //   }
+
+  //   countriesList.innerHTML = countries
+  //     .map((country) => `<li class="text-sm mb-1">${country.name}</li>`)
+  //     .join("");
+  // }
+
+  // fetchCountries();
+</script>

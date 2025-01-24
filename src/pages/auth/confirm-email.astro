@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { createClient } from "../../lib/supabase";
+
+const supabase = createClient.astro(Astro);
+
+const { url, redirect } = Astro;
+
+const token_hash = url.searchParams.get("token_hash");
+
+let error = null;
+
+// Verify token if both token_hash and type are present
+if (token_hash) {
+  // Attempt to verify the OTP token
+  const { error: verificationError } = await supabase.auth.verifyOtp({
+    token_hash,
+    type: "signup",
+  });
+
+  // Handle verification result
+  if (verificationError) {
+    error = verificationError.message;
+  } else {
+    return redirect(`/login?success=${encodeURIComponent("Email verified successfully")}`);
+  }
+}
+---
+
+<Layout title="Confirm Email">
+  <div class="flex flex-col items-center justify-center flex-1 p-4">
+    {
+      error ? (
+        <div 
+          class="mb-6 p-4 bg-red-100 border border-red-300 text-red-700 rounded-md text-center w-full max-w-sm"
+          role="alert"
+          aria-live="assertive"
+        >
+          <p class="font-semibold">{error}</p>
+        </div>
+      ) : (
+        <div 
+          class="mb-6 p-4 border border-gray-200 rounded-md text-center w-full max-w-sm focus:outline-none"
+          role="status"
+          aria-live="polite"
+        >
+          <h2 class="text-xl font-bold mb-2">Verifying your email...</h2>
+          <p class="text-sm">Please wait while we confirm your email address.</p>
+        </div>
+      )
+    }
+  </div>
+</Layout>
